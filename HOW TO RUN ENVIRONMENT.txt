@@ -17,6 +17,6 @@ myvenv\Scripts\activate
 ------------------------------pip install --upgrade opencv-python opencv-python-headless---------------
 
 6. Run python script web_app.py to run local web app:
-C:\Users\david\yolov8_env\webapp\livestock_app\web_app_bytetrack.py
+C:\Users\david\yolov8_env\livestock_app\webapp\web_app_bytetrack.py
 
 
