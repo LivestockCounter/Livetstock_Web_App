@@ -1,0 +1,22 @@
+Environment location (create folder if not yet done): C:\Users\david\yolov8_env
+
+RUN THESE IN CMD
+1. Navigate to your project folder where you want to create the virtual environment:
+cd C:\Users\david\yolov8_env
+
+2. To create the environment (if not yet done), run:
+------------------------------python -m venv myvenv----------------------------------------------------
+
+3. After the virtual environment is created, activate it:
+myvenv\Scripts\activate
+
+4. To run the flask app, install Flask, ultralytics, and pillow modules/libraries (if not yet done):
+------------------------------pip install Flask ultralytics pillow-------------------------------------
+
+5. To track object, install opencv and other module/library (if not yet done):
+------------------------------pip install --upgrade opencv-python opencv-python-headless---------------
+
+6. Run python script web_app.py to run local web app:
+C:\Users\david\yolov8_env\webapp\livestock_app\web_app_bytetrack.py
+
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock Counter Result</title>
+</head>
+<body>
+    <h1>Livestock Detection Result</h1>
+    
+    <div>
+        <h2>Detected Counts</h2>
+        <p>Cattle: {{ counts['Cattle'] }}</p>
+        <p>Chicken: {{ counts['Chicken'] }}</p>
+        <p>Goat: {{ counts['Goat'] }}</p>
+    </div>
+
+    <div>
+        <h2>Detected Output</h2>
+        {% if file_type == 'image' %}
+            <img src="{{ url_for('static', filename='output/' + original_file_name) }}" alt="Detected Image" style="max-width: 320px; max-height: 320px;">
+        {% elif file_type == 'video' %}
+            <video controls preload="auto" style="max-width: 50%;">
+                <source src="{{ url_for('static', filename='output/' + original_file_name) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% else %}
+            <p>Unsupported file format.</p>
+        {% endif %}
+    </div>
+    
+    
+    <div>
+        <a href="/download?file_name={{ original_file_name }}">Download Output</a>
+    </div>
+    
+    <div>
+        <button onclick="window.location.href='/';">Go Back</button>
+    </div>
+</body>
+</html>
