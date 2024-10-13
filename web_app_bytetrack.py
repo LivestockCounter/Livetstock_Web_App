@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # Load your YOLOv8 model
-model = YOLO('C:/Users/david/yolov8_env/webapp/version_1_last.pt')
+model = YOLO('version_1_last.pt')
 
 # Path to save output images and videos
 output_dir = os.path.join(app.root_path, 'static', 'output')
