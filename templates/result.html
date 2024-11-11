@@ -4,38 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livestock Counter Result</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/logo2.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result_style.css') }}">
 </head>
 <body>
-    <h1>Livestock Detection Result</h1>
-    
-    <div>
-        <h2>Detected Counts</h2>
-        <p>Cattle: {{ counts['Cattle'] }}</p>
-        <p>Chicken: {{ counts['Chicken'] }}</p>
-        <p>Goat: {{ counts['Goat'] }}</p>
-    </div>
+<!-- loading section -->
+<div class="loader"></div>
+<!-- loading section -->
 
-    <div>
-        <h2>Detected Output</h2>
-        {% if file_type == 'image' %}
-            <img src="{{ url_for('static', filename='output/' + original_file_name) }}" alt="Detected Image" style="max-width: 320px; max-height: 320px;">
-        {% elif file_type == 'video' %}
-            <video controls preload="auto" style="max-width: 50%;">
+<!-- pop_up section -->
+<div class="pop_up">
+    <span>&times;</span>
+    {% if file_type == 'image' %}
+        <div class="image_source"><img src="{{ url_for('static', filename='output/' + original_file_name) }}" alt="Detected Image"></div>
+    {% elif file_type == 'video' %}
+        <video class="video_source" controls>
+        <source src="{{ url_for('static', filename='output/' + original_file_name) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    {% else %}
+        <p>Unsupported file format.</p>
+    {% endif %}
+</div>
+<!-- pop_up section -->
+
+<!-- navbar section -->
+<div id="home"></div>
+<header class="navbar_container">
+        <div class="logo">
+        <a href="#home"><img src="{{ url_for('static', filename='icons/logo.png') }}"></a>
+        <a href="#home" onclick="restartApp()"><h1>LivestockCounter</h1></a>
+        </div>
+        <div class="drop_menu">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home" onclick="refreshApp()">Home</a></li>
+                <li><a href="#home" onclick="toggleTranslation()">Translate</a></li>
+                <li><a href="#home" class="tips_guides" onclick="">Tips & Guides</a></li>
+                <li><a href="#home">Contact Us</a></li>
+            </ul>
+        </nav>
+</header>
+<!-- navbar section -->
+
+<!-- tips_pop_up section -->
+<div class="tips_pop_up">
+    <div class="tips_container">
+        <video class="video_source" autoplay muted loop>
+        <source src="{{ url_for('static', filename='cattle_video.mov') }}" type="video/mp4">
+        </video>
+        <div class="tips">
+            <h1 class="tips_h1">Tips & <span>Guides</span></h1>
+            <p class="tip_1"><strong>1. Increase the Accuracy:</strong> Use images and videos that show the entire animal clearly.</p>
+            <p class="tip_2"><strong>2. Faster Video Processing:</strong> For faster processing, use videos with 30 FPS and a lower bitrate.</p>
+            <p class="tip_3"><strong>3. File Format:</strong> Use landscape-oriented images and videos. Portrait formats may be cropped during processing.</p>
+            <p class="tip_4"><strong>4. Remember to Download:</strong> Don’t forget to download your processed results!</p>
+            <p class="tip_5"><strong>5. If Unresponsive:</strong> Click the Home button if the page becomes unresponsive.</p>
+        </div>
+    </div>
+ </div>
+<!-- tips_pop_up section -->
+
+<!-- mainbody section -->
+<div class="main_container">
+    <!-- output_container section -->
+    <div class="output_container">
+        <div class="output_link">
+            <h1>Livestock Detection Result</h1>
+            <p class="result_info">This version of Livestock Counting System still needs improvement. 
+                Results may sometimes include incorrect detections and inaccurate counts. 
+                <strong><br>Thank you For using our system!</strong></p>
+            <div class="links">
+                <div class="back_button">
+                    <a href="/" onclick="restartApp()">Home</a>
+                </div>
+                <div class="download">
+                    <a href="/download?file_name={{ original_file_name }}">Download Results</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="output_result">
+            {% if file_type == 'image' %}
+                <div class="image_source"><img src="{{ url_for('static', filename='output/' + original_file_name) }}" alt="Detected Image"></div>
+            {% elif file_type == 'video' %}
+                <video class="video_source" controls>
                 <source src="{{ url_for('static', filename='output/' + original_file_name) }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        {% else %}
-            <p>Unsupported file format.</p>
-        {% endif %}
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <p>Unsupported file format.</p>
+            {% endif %}
+        </div>
     </div>
-    
-    
-    <div>
-        <a href="/download?file_name={{ original_file_name }}">Download Output</a>
+    <!-- output_container section -->
+
+    <!-- count_container section -->
+    <div class="count_container">
+        <div class="count_h2">
+            <h2>Detected Counts</h2>
+        </div>
+        <div class="count_number">
+            <div class="cattle_icon"><img src="{{ url_for('static', filename='icons/cattle_white.png') }}" alt="cattle">
+                <p>Cattle: {{ counts['Cattle'] }}</p></div>
+            <div class="chicken_icon"><img src="{{ url_for('static', filename='icons/chicken_white.png') }}" alt="chicken">
+                <p>Chicken: {{ counts['Chicken'] }}</p></div>
+            <div class="goat_icon"><img src="{{ url_for('static', filename='icons/goat_white.png') }}" alt="goat">
+                <p>Goat: {{ counts['Goat'] }}</p></div>
+        </div>
     </div>
-    
-    <div>
-        <button onclick="window.location.href='/';">Go Back</button>
-    </div>
+    <!-- count_container section -->
+</div>
+<!-- mainbody section -->
+<script src="{{ url_for('static', filename='result_script.js') }}"></script>
 </body>
 </html>

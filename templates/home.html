@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livestock Counter</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/logo2.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home_style.css') }}">
+</head>
+<body >
+<!-- loading section -->
+<div class="loader">
+    <div class="ring"></div>
+    <span class="loading_text">Loading</span>
+    <div class="process">
+        <p class="process_info">This may take a while. If you'r process a video, this 
+            can take<br> 30 minutes or more depending on the length of the video.</p>
+        <button type="button" onclick="restartApp()" class="cancel_button">Cancel</button>
+    </div>
+</div>
+<!-- loading section -->
+
+
+<!-- navbar section -->
+<div id="home"></div>
+<header class="navbar_container">
+        <div class="logo">
+        <a href="#home"><img src="{{ url_for('static', filename='icons/logo.png') }}"></a>
+        <a href="#home"><h1>LivestockCounter</h1></a>
+        </div>
+        <div class="drop_menu">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home" onclick="refreshApp()">Home</a></li>
+                <li><a href="#home" onclick="toggleTranslation()">Translate</a></li>
+                <li><a href="#home" class="tips_guides" onclick="">Tips & Guides</a></li>
+                <li><a href="#home">Contact Us</a></li>
+            </ul>
+        </nav>
+</header>
+<!-- navbar section -->
+
+
+<!-- tips_pop_up section -->
+<div class="tips_pop_up">
+    <div class="tips_container">
+        <video class="video_source" autoplay muted loop>
+        <source src="{{ url_for('static', filename='cattle_video.mov') }}" type="video/mp4">
+        </video>
+        <div class="tips">
+            <h1 class="tips_h1">Tips & <span>Guides</span></h1>
+            <p class="tip_1"><strong>1. Increase the Accuracy:</strong> Use images and videos that show the entire animal clearly.</p>
+            <p class="tip_2"><strong>2. Faster Video Processing:</strong> For faster processing, use videos with 30 FPS and a lower bitrate.</p>
+            <p class="tip_3"><strong>3. File Format:</strong> Use landscape-oriented images and videos. Portrait formats may be cropped during processing.</p>
+            <p class="tip_4"><strong>4. Remember to Download:</strong> Don’t forget to download your processed results!</p>
+            <p class="tip_5"><strong>5. If Unresponsive:</strong> Click the Home button if the page becomes unresponsive.</p>
+        </div>
+    </div>
+ </div>
+<!-- tips_pop_up section -->
+
+
+<!-- mainbody section -->
+<div class="mainbody">
+<!-- intro section -->
+    <div class="intro">
+        <img src="{{ url_for('static', filename='backgrounds/intro_background.png') }}" alt="">
+        <div class="intro_container">
+        <p class="head_title">AUTOMATIC <span><br>LIVESTOCK COUNTING</span></p>
+        <p>Say goodbye to time-consuming manual counting and experience a faster, 
+            more reliable way to manage your livestock with precision and efficiency.
+            Our automated Livestock Counting System is designed to make counting animals easier 
+            than ever. Integrating advance image recognition and powerful YOLOv8 
+            framework, our system identifies and counts livestock—including 
+            cattle, chickens, and goats—directly from images or videos.</p>
+        <button class="try_button" onclick="trysystem()">Try Now</button>
+        </div>
+    </div>
+<!-- intro section -->
+
+<!-- form section -->
+ <div class="form_container">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="container">
+            <div class="header-section">
+                <h1 class="upload_h1">Upload a file to Count for Livestocks.</h1>
+                <p class="upload_p">Only images & videos are accepted.</p>
+            </div>
+            <div class="drop-section" id="upload-box" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                <div class="col">
+                    <div class="cloud-icon">
+                        <img src="{{ url_for('static', filename='icons/cloud.png') }}" alt="cloud">
+                    </div>
+                    <span class="upload_span">Drag & Drop file here</span>
+                    <span>OR</span>
+                    <button class="file-selector">Browse Files</button>
+                    <input type="file" id="file-input" class="file-selector-input" name="file" required>
+                </div>
+                <div class="col">
+                    <div class="drop-here">Drop Here</div>
+                </div>
+            </div>
+                <div class="list-section">
+                    <div class="list-title">Uploaded File</div>
+                    <div class="list"></div>
+                    <div class="submit" onclick="file_processing()">
+                        <input class="submit_button" type="submit" value="Process File" required>
+                    </div>
+                </div>
+        </div>
+    </form>
+</div>
+<!-- form section -->
+</div>
+<!-- mainbody section -->
+<script src="{{ url_for('static', filename='home_script.js') }}"></script>
+</body>
+</html>
