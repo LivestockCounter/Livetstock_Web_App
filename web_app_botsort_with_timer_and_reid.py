@@ -41,11 +41,11 @@ def home():
 @app.route('/restart', methods=['POST'])
 def restart():
     # Method 1: Update file timestamp to trigger auto-reloader (for development)
-    script_path = 'C:\\Users\\david\\yolov8_env\\web_app_botsort_with_timer_and_reid.py'
-    os.utime(script_path, (time.time(), time.time()))
+    # script_path = 'C:\\Users\\Client\\yolov8_env\\web_app_botsort_with_timer_and_reid.py'
+    # os.utime(script_path, (time.time(), time.time()))
     
     # Method 2: Exit the process to trigger a full restart (for deployment)
-    # os._exit(0)
+    os._exit(0)
 
     return "Restarting...", 200
 
