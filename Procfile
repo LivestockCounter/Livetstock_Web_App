@@ -1,1 +1,1 @@
-web: gunicorn web_app_bytetrack:app
+web: gunicorn web_app_botsort_with_timer_and_reid:app
